@@ -25,35 +25,35 @@ public class Reservation {
 	 * Number of days ahead for departure date constant
 	 * Used for default constructor
 	 */
-	public static final int      DEFAULT_DEPARTURE_DATE_NUMBER_DAYS_AHEAD = 7;
+	private static final int      DEFAULT_DEPARTURE_DATE_NUMBER_DAYS_AHEAD = 7;
 	
 	/**
 	 * Number of days ahead for return date constant
 	 * Used for default constructor
 	 */
-	public static final int      DEFAULT_RETURN_DATE_NUMBER_DAYS_AHEAD    = 14;
+	private static final int      DEFAULT_RETURN_DATE_NUMBER_DAYS_AHEAD = 14;
 	
 	/**
 	 * Departure city constant
 	 * Used for default constructor
 	 */
-	public static final String   DEFAULT_DEPARTURE_CITY       = "MSP";
+	private static final String   DEFAULT_DEPARTURE_CITY = "MSP";
 	
 	/**
 	 * Destination city constant
 	 * Used for default constructor
 	 */
-	public static final String   DEFAULT_DESTINATION_CITY     = "New York";
+	private static final String   DEFAULT_DESTINATION_CITY = "New York";
 	
 	/**
 	 * Number of seats
 	 */
-	public static final int      NUMBER_OF_SEATS              = 28;
+	public static final int      NUMBER_OF_SEATS = 28;
 	
 	/**
 	 * Array of seats available
 	 */
-	public static final String[] SEATS_ARRAY                  = {
+	public static final String[] SEATS_ARRAY = {
 		"1A", "1B", "1C", "1D",
 		"2A", "2B", "2C", "2D",
 		"3A", "3B", "3C", "3D",

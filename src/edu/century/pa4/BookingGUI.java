@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -30,14 +29,7 @@ import java.util.Date;
  * @author Alexandr Sergeyev <ns1418cz@my.century.edu>
  */
 public class BookingGUI extends JFrame implements ActionListener 
-{
-	/**
-	 * If debug set to true
-	 * prints console messages not only to console text area, 
-	 * but also to console
-	 */
-	private boolean debug = false;
-	
+{	
 	/**
 	 * Program Name
 	 */
@@ -91,42 +83,42 @@ public class BookingGUI extends JFrame implements ActionListener
     /**
      * JTextField for first name
      */
-    JTextField firstNameTextField       = new JTextField(NUMBER_OF_CHAR_INPUT);
+    private JTextField firstNameTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
     
     /**
      * JTextField for last name
      */
-    JTextField lastNameTextField        = new JTextField(NUMBER_OF_CHAR_INPUT);
+    private JTextField lastNameTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
     
     /**
      * JTextField for departure city
      */
-    JTextField departureCityTextField   = new JTextField(NUMBER_OF_CHAR_INPUT);
+    private JTextField departureCityTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
     
     /**
      * JTextField for destination city
      */
-    JTextField destinationCityTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
+    private JTextField destinationCityTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
     
     /**
      * JTextField for departure date
      */
-    JTextField departureDateTextField   = new JTextField(NUMBER_OF_CHAR_INPUT);
+    private JTextField departureDateTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
     
     /**
      * JTextField for return date
      */
-    JTextField returnDateTextField      = new JTextField(NUMBER_OF_CHAR_INPUT);
+    private JTextField returnDateTextField = new JTextField(NUMBER_OF_CHAR_INPUT);
     
     /**
      * JComboBox for seat selector
      */
-    JComboBox  seatSelectorBox          = new JComboBox(Reservation.SEATS_ARRAY);
+    private JComboBox  seatSelectorBox = new JComboBox(Reservation.SEATS_ARRAY);
     
     /**
      * JTextArea for Console textArea
      */
-    public JTextArea consoleTextArea;
+    private JTextArea consoleTextArea;
     
     
     /**
@@ -157,13 +149,13 @@ public class BookingGUI extends JFrame implements ActionListener
         formPanel.setLayout(layout);
         
         //define form labels
-        JLabel firstNameLabel       = new JLabel("First Name", SwingConstants.RIGHT);
-        JLabel lastNameLabel        = new JLabel("Last Name",  SwingConstants.RIGHT);
-        JLabel departureCityLabel   = new JLabel("From",       SwingConstants.RIGHT);
-        JLabel destinationCityLabel = new JLabel("To",         SwingConstants.RIGHT);
-        JLabel departureDateLabel   = new JLabel("Departure",  SwingConstants.RIGHT);
-        JLabel returnDateLabel      = new JLabel("Return",     SwingConstants.RIGHT);
-        JLabel seatSelectorLabel    = new JLabel("Seat",       SwingConstants.RIGHT);
+        JLabel firstNameLabel       = new JLabel("First Name");
+        JLabel lastNameLabel        = new JLabel("Last Name");
+        JLabel departureCityLabel   = new JLabel("From");
+        JLabel destinationCityLabel = new JLabel("To");
+        JLabel departureDateLabel   = new JLabel("Departure");
+        JLabel returnDateLabel      = new JLabel("Return");
+        JLabel seatSelectorLabel    = new JLabel("Seat");
         
         // Define buttons
         JButton actionBookButton = new JButton("Book");
@@ -265,11 +257,11 @@ public class BookingGUI extends JFrame implements ActionListener
         
         // Row 5 - Buttons
         layout.putConstraint(SpringLayout.WEST,  actionBookButton, leftPadding1, SpringLayout.WEST, formPanel);
-        layout.putConstraint(SpringLayout.NORTH, actionBookButton, 130, SpringLayout.NORTH, formPanel);
-        layout.putConstraint(SpringLayout.WEST,  actionListReservationButton,  100, SpringLayout.EAST, actionBookButton);
-        layout.putConstraint(SpringLayout.NORTH, actionListReservationButton,  130, SpringLayout.NORTH, formPanel);
-        layout.putConstraint(SpringLayout.WEST,  actionClearConsoleButton,  100, SpringLayout.EAST, actionListReservationButton);
-        layout.putConstraint(SpringLayout.NORTH, actionClearConsoleButton,  130, SpringLayout.NORTH, formPanel);
+        layout.putConstraint(SpringLayout.NORTH, actionBookButton, 135, SpringLayout.NORTH, formPanel);
+        layout.putConstraint(SpringLayout.WEST,  actionListReservationButton,  20, SpringLayout.EAST, actionBookButton);
+        layout.putConstraint(SpringLayout.NORTH, actionListReservationButton,  135, SpringLayout.NORTH, formPanel);
+        layout.putConstraint(SpringLayout.WEST,  actionClearConsoleButton,  20, SpringLayout.EAST, actionListReservationButton);
+        layout.putConstraint(SpringLayout.NORTH, actionClearConsoleButton,  135, SpringLayout.NORTH, formPanel);
         
         // Row 6 - Console
         layout.putConstraint(SpringLayout.WEST,  consolePanel, leftPadding1, SpringLayout.WEST, formPanel);
@@ -372,9 +364,6 @@ public class BookingGUI extends JFrame implements ActionListener
 				errorMessage += "Dates should be in 'MM/DD/YYYY' format." + "\n";
 			}        	
     	}
-    	
-    	
-    	
     	return errorMessage;
     }
     
@@ -393,8 +382,7 @@ public class BookingGUI extends JFrame implements ActionListener
     	String errorMessage = validateReservation();
     	
     	if(! errorMessage.isEmpty()) {
-    		clearConsole();
-    		writeToConsole("Form Validation Errors: \n" + errorMessage);
+    		writeToConsole("Form Errors: \n" + errorMessage + "\n");
     		return false;
     	}
 
@@ -438,8 +426,8 @@ public class BookingGUI extends JFrame implements ActionListener
     		}
     	}
     	if(! message.isEmpty()) {
-    		message = "Reservation List" + "\n" + message;
     		clearConsole();
+    		message = "Reservation List" + "\n" + message;
     		writeToConsole(message);
     		return message;
     	} else {
@@ -504,15 +492,10 @@ public class BookingGUI extends JFrame implements ActionListener
     /**
      * Write to console text area
      * 
-     * If debug set to true print message also in the system console
-     * 
      * @param message
      */
     public void writeToConsole(String message) {
     	String currentConsoleText = consoleTextArea.getText();
     	consoleTextArea.setText(currentConsoleText + message);
-    	if(debug) {
-        	System.out.print(currentConsoleText + message);
-    	}
     }
 }
